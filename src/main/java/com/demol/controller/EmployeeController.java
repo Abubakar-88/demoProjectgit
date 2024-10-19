@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/employee")
 public class EmployeeController {
 
+
     @Autowired
     EmployeeService employeeService;
 
@@ -22,7 +23,7 @@ public class EmployeeController {
 
         EmployeeResponseDTO responseDTO = employeeService.createEmployee(employeeRequestDTO);
 
-
+       System.out.println("Saving");
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
