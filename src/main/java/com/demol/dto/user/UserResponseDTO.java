@@ -1,6 +1,5 @@
 package com.demol.dto.user;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,12 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRequestDTO {
+public class UserResponseDTO {
 
-
+    private Long id;
     private String name;
-    private String email;
     private String userName;
-    private String password;
+    private String email;
     private int phoneNumber;
+
 }
