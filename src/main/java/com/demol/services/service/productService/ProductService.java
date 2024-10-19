@@ -1,4 +1,4 @@
-package com.demol.services.service;
+package com.demol.services.service.productService;
 
 import com.demol.dto.product.ProductRequestDto;
 import com.demol.dto.product.ProductResponseDto;

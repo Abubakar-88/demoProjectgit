@@ -1,9 +1,10 @@
-package com.demol.services.service;
+package com.demol.services.serviceImpl.prodServimpl;
 
 import com.demol.dto.product.ProductRequestDto;
 import com.demol.dto.product.ProductResponseDto;
 import com.demol.entity.Product;
-import com.demol.repository.ProductRepository;
+import com.demol.repository.productrepository.ProductRepository;
+import com.demol.services.service.productService.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
     @Value("${image.upload.dir}")
     private String uploadDir;
     @Autowired
