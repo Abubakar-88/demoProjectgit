@@ -1,6 +1,5 @@
-package com.demol.dto.product;
+package com.demol.dto.vendor;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,9 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductResponseDto {
+public class VendorResponseDTO {
     private Long id;
     private String name;
-    private String price;
-    private String image;
+    private String email;
 }
