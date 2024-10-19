@@ -22,9 +22,8 @@ public class EmployeeController {
             ( @RequestBody  EmployeeRequestDTO employeeRequestDTO) {
 
         EmployeeResponseDTO responseDTO = employeeService.createEmployee(employeeRequestDTO);
-
+        System.out.println("Saving");
        System.out.println("Saving");
-
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
