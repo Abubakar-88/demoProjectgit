@@ -23,6 +23,7 @@ public class ProductServiceImpl implements ProductService{
     ProductRepository productRepository;
     @Autowired
     ModelMapper modelMapper;
+    @Override
     public ProductResponseDto addProduct(ProductRequestDto productRequestDto, MultipartFile multipartFile) throws IOException {
         Product product = modelMapper.map(productRequestDto, Product.class);
         if(!multipartFile.isEmpty()){
