@@ -34,6 +34,14 @@ public class ProductServiceImpl implements ProductService{
         return modelMapper.map(saveProduct, ProductResponseDto.class);
 
     }
+
+    @Override
+    public ProductResponseDto getProductById(Long id) {
+        Product product = productRepository.findById(id).orElse(null);
+        return  modelMapper.map(product, ProductResponseDto.class);
+
+    }
+
     public String saveImage(MultipartFile file, Product product) throws IOException {
         Path uploadPath = Paths.get(uploadDir + "/product");
         if(!Files.exists(uploadPath)){
