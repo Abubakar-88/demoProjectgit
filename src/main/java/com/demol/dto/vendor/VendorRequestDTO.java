@@ -1,17 +1,16 @@
-package com.demol.dto.customer;
+package com.demol.dto.vendor;
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerRequestDTO {
-
+public class VendorRequestDTO {
+    private Long id;
     private String name;
-    private Long phone;
-    private String dob;
+    private String email;
+    private String password;
+
 }

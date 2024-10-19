@@ -1,5 +1,6 @@
 package com.demol.services.serviceImpl;
 
+<<<<<<< HEAD
 import com.demol.dto.user.UserRequestDTO;
 import com.demol.dto.user.UserResponseDTO;
 import com.demol.entity.Users;
@@ -58,4 +59,14 @@ public class UserServiceImpl implements UserService {
         //another option
        // userRepository.deleteById(id);
     }
+=======
+import com.demol.dto.Employee.EmployeeRequestDTO;
+import com.demol.dto.Employee.EmployeeResponseDTO;
+import com.demol.services.service.EmployeeService;
+import org.springframework.stereotype.Service;
+
+
+public class UserServiceImpl {
+
+>>>>>>> eec26067228f30ba420b3fa341603c4befb8e9a4
 }
