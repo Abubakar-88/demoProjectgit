@@ -1,6 +1,4 @@
 package com.demol.services.serviceImpl;
-
-<<<<<<< HEAD
 import com.demol.dto.user.UserRequestDTO;
 import com.demol.dto.user.UserResponseDTO;
 import com.demol.entity.Users;
@@ -20,33 +18,34 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     ModelMapper modelMapper;
+
     @Override
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
-        Users users = modelMapper.map(userRequestDTO,Users.class);
+        Users users = modelMapper.map(userRequestDTO, Users.class);
         Users users1 = userRepository.save(users);
-         UserResponseDTO userResponseDTO = modelMapper.map(users1,UserResponseDTO.class);
+        UserResponseDTO userResponseDTO = modelMapper.map(users1, UserResponseDTO.class);
         return userResponseDTO;
     }
 
     @Override
     public UserResponseDTO getById(Long id) {
         Users users = userRepository.findById(id).orElse(null);
-       UserResponseDTO userResponseDTO =  modelMapper.map(users ,UserResponseDTO.class);
+        UserResponseDTO userResponseDTO = modelMapper.map(users, UserResponseDTO.class);
         return userResponseDTO;
     }
 
     @Override
     public List<UserResponseDTO> getAllUsers() {
-        List<Users> usersList =  userRepository.findAll();
-        return usersList.stream().map(users -> modelMapper.map(users,UserResponseDTO.class)).toList();
+        List<Users> usersList = userRepository.findAll();
+        return usersList.stream().map(users -> modelMapper.map(users, UserResponseDTO.class)).toList();
     }
 
     @Override
-    public UserResponseDTO upDateUsers(UserRequestDTO userRequestDTO,Long id) {
+    public UserResponseDTO upDateUsers(UserRequestDTO userRequestDTO, Long id) {
         Users existtingUsers = userRepository.findById(id).orElse(null);
 //        int id = 10;
 //        id = 20;
-        modelMapper.map(userRequestDTO,existtingUsers);
+        modelMapper.map(userRequestDTO, existtingUsers);
         Users updatedUsers = userRepository.save(existtingUsers);
         UserResponseDTO userResponseDTO = modelMapper.map(updatedUsers, UserResponseDTO.class);
         return userResponseDTO;
@@ -57,16 +56,8 @@ public class UserServiceImpl implements UserService {
         Users existtingUsers = userRepository.findById(id).orElse(null);
         userRepository.delete(existtingUsers);
         //another option
-       // userRepository.deleteById(id);
+        // userRepository.deleteById(id);
     }
-=======
-import com.demol.dto.Employee.EmployeeRequestDTO;
-import com.demol.dto.Employee.EmployeeResponseDTO;
-import com.demol.services.service.EmployeeService;
-import org.springframework.stereotype.Service;
-
-
-public class UserServiceImpl {
-
->>>>>>> eec26067228f30ba420b3fa341603c4befb8e9a4
 }
+
+

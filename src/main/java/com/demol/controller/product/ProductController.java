@@ -22,4 +22,9 @@ public class ProductController {
        ProductResponseDto responseDto = productService.addProduct(productRequestDto,multipartFile);
        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Long id){
+        ProductResponseDto responseDto = productService.getProductById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+    }
 }
