@@ -15,7 +15,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
+
+import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
+
 @Service
 public class ProductServiceImpl implements ProductService {
     @Value("${image.upload.dir}")
@@ -40,6 +44,32 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponseDto getProductById(Long id) {
         Product product = productRepository.findById(id).orElse(null);
         return  modelMapper.map(product, ProductResponseDto.class);
+
+    }
+
+    @Override
+    public List<ProductResponseDto> getAllProduct() {
+      List<Product>  productList = productRepository.findAll();
+      return productList.stream().map(product -> modelMapper.map(product,ProductResponseDto.class)).toList();
+
+    }
+
+    @Override
+    public ProductResponseDto updateProduct(ProductRequestDto prodReqDto, Long id, MultipartFile mFile) throws IOException {
+        Product existingProd = productRepository.findById(id).orElse(null);
+        modelMapper.map(prodReqDto, existingProd);
+        if(!mFile.isEmpty()){
+           String fileName = saveImage(mFile,existingProd);
+           existingProd.setImage(fileName);
+        }
+        Product updatedProd = productRepository.save(existingProd);
+       return modelMapper.map(updatedProd,ProductResponseDto.class);
+    }
+
+    @Override
+    public void deleteProduct(Long id) {
+        Product existingProd = productRepository.findById(id).orElse(null);
+        productRepository.delete(existingProd);
 
     }
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/product")
@@ -26,5 +27,25 @@ public class ProductController {
     public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Long id){
         ProductResponseDto responseDto = productService.getProductById(id);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+    }
+    @GetMapping("/getAll")
+    public ResponseEntity<List<ProductResponseDto>> getAllProduct(){
+        List<ProductResponseDto> responseDtos = productService.getAllProduct();
+        return ResponseEntity.status(HttpStatus.OK).body(responseDtos);
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ProductResponseDto> updateProductById(
+            @RequestPart("product") ProductRequestDto prodreqDto,
+            @PathVariable Long id,
+            @RequestPart("file") MultipartFile multipartFile
+    ) throws IOException {
+       ProductResponseDto responseDto = productService.updateProduct(prodreqDto, id, multipartFile);
+       //return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+        return ResponseEntity.ok(responseDto);
+    }
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity <Void> deleteProduct(@PathVariable Long id){
+        productService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
     }
 }
