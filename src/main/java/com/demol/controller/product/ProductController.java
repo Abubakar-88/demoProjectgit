@@ -3,14 +3,18 @@ package com.demol.controller.product;
 import com.demol.dto.product.ProductRequestDto;
 import com.demol.dto.product.ProductResponseDto;
 import com.demol.services.service.productService.ProductService;
+
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/product")
@@ -18,8 +22,10 @@ public class ProductController {
     @Autowired
     ProductService productService;
     @PostMapping("/saveProd")
-    public ResponseEntity<ProductResponseDto > addProduct(@RequestPart("file")MultipartFile multipartFile,
-                                         @RequestPart("product")ProductRequestDto productRequestDto) throws IOException {
+    public ResponseEntity<Object> addProduct(@RequestPart("file")MultipartFile multipartFile, @Valid
+                                                          @RequestPart("product")ProductRequestDto productRequestDto
+                                                         ) throws IOException {
+
        ProductResponseDto responseDto = productService.addProduct(productRequestDto,multipartFile);
        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }

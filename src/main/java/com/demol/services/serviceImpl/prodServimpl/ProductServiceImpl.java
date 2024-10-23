@@ -56,31 +56,45 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDto updateProduct(ProductRequestDto prodReqDto, Long id, MultipartFile mFile) throws IOException {
+        //find existing product
         Product existingProd = productRepository.findById(id).orElse(null);
+        //change existingProd by prodReqDto
         modelMapper.map(prodReqDto, existingProd);
+        //set image
         if(!mFile.isEmpty()){
            String fileName = saveImage(mFile,existingProd);
            existingProd.setImage(fileName);
         }
+        //save existingProd in data base
         Product updatedProd = productRepository.save(existingProd);
+        //convert updateProd to ProductResponseDto and return
        return modelMapper.map(updatedProd,ProductResponseDto.class);
     }
 
     @Override
     public void deleteProduct(Long id) {
+        // find existing product
         Product existingProd = productRepository.findById(id).orElse(null);
+        //then delete existing product
         productRepository.delete(existingProd);
 
     }
 
     public String saveImage(MultipartFile file, Product product) throws IOException {
+        //get() converts a string into a path object
         Path uploadPath = Paths.get(uploadDir + "/product");
+        //check directory
         if(!Files.exists(uploadPath)){
+            //create directory
             Files.createDirectories(uploadPath);
         }
+        //give a name of directory
         String fileName = product.getName()+"_"+ UUID.randomUUID();
+        //resolve() create full path by combining uploadPath and fileName
         Path filePath = uploadPath.resolve(fileName);
+        //copy this path
         Files.copy(file.getInputStream(),filePath);
+        //return file name
         return fileName;
     }
 
